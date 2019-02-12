@@ -1,0 +1,8 @@
+<form [formGroup]="requestOrderFormGroup">
+    <mat-form-field>
+        <mat-select placeholder="Drinks" multiple formControlName="drinkControl">
+            <mat-option value="option" *ngFor="let drink of drinks" [value]="drink.name">{{ drink.name }} ({{ drink.container | containerToTextPipe }})</mat-option>
+          </mat-select>         
+      </mat-form-field>
+      <button mat-button type="button" color="primary"  (click)="request()">Submit</button>
+</form>
