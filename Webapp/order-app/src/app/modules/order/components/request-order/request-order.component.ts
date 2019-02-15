@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { OrderService } from '../../shared/order.service';
 import { Drink } from '../../shared/drink.model';
 import { DrinkRequestFormGroup } from '../../shared/drinkrequest.formgroup';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-request-order',
@@ -11,7 +12,7 @@ import { DrinkRequestFormGroup } from '../../shared/drinkrequest.formgroup';
 })
 export class RequestOrderComponent implements OnInit {
   drinks: Drink[] = [];
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private router: Router) { }
   requestOrderFormGroup: DrinkRequestFormGroup;
   ngOnInit() {
     this.requestOrderFormGroup = new DrinkRequestFormGroup([]);
@@ -23,7 +24,12 @@ export class RequestOrderComponent implements OnInit {
 
   request() {
     const selectedDrinks = this.requestOrderFormGroup.getSelectedDrinks();
-    console.log(selectedDrinks);
+    this.orderService.makeRequest(selectedDrinks).subscribe();
+    
+  }
+
+  back(){
+    this.router.navigate(['../']);
   }
 }
 

@@ -1,53 +1,50 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using OrderApi.Models;
 
 namespace OrderApi.Controllers
 {
-    [Route("api/drinks")]
-    public class DrinksController
+    [Route("api/requests")]
+    public class RequestController : Controller
     {
-        [HttpGet("")]
-        public IReadOnlyList<DrinkDTO> GetDrinks()
+        private readonly IList<Request> _requests = new List<Request>();
+
+        [HttpPost("")]
+        public void MakeRequest([FromBody] IReadOnlyList<DrinkDTO> requestedDrinks)
         {
-            return new List<DrinkDTO>()
+            var request = new Request()
             {
-                new DrinkDTO()
-                {
-                    Name = "Club mate",
-                    Container = Containers.Bottle50
-                },
-                new DrinkDTO()
-                {
-                    Name = "Flora power",
-                    Container = Containers.Bottle50
-                },
-                new DrinkDTO()
-                {
-                    Name = "Club mate (Granaatappel)",
-                    Container = Containers.Bottle50
-                },
-                new DrinkDTO()
-                {
-                    Name = "Tönisteiner",
-                    Container = Containers.Can33
-                }
+                CreationDate = DateTime.Now,
+                IsCompleted = false,
+                Drinks = requestedDrinks.Select(x => new RequestedDrink(x)).ToList()
             };
+            _requests.Add(request);
         }
     }
 
-    public class DrinkDTO
+    public class RequestedDrink
     {
-        public string Name { get; set; }
-        public Containers Container { get; set; }
+        private DrinkDTO _drinkDto;
+
+        public Guid Id { get; set; }
+
+        public RequestedDrink(DrinkDTO drinkDto)
+        {
+            Id = Guid.NewGuid();
+            _drinkDto = drinkDto;
+        }
+
+        public string Name => _drinkDto.Name;
+
+        public Containers Container => _drinkDto.Container;
     }
 
-    public enum Containers
+    public class Request
     {
-        Can25 = 1,
-        Can33 = 2,
-        Bottle33 = 3,
-        Bottle50 = 4,
-        Glass = 5
+        public bool IsCompleted { get; set; }
+        public List<RequestedDrink> Drinks { get; set; }
+        public DateTime CreationDate { get; set; }
     }
-
 }

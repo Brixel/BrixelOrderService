@@ -8,9 +8,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
+  
   constructor(private orderProxy: OrderProxy) { }
 
   getDrinks(): Observable<Drink[]> {
     return this.orderProxy.getDrinks();
+  }
+
+  makeRequest(selectedDrinks: Drink[]) {
+    return this.orderProxy.makeRequest(selectedDrinks);
   }
 }
