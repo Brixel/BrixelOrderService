@@ -24,8 +24,8 @@ export class RequestOrderComponent implements OnInit {
 
   request() {
     const selectedDrinks = this.requestOrderFormGroup.getSelectedDrinks();
-    this.orderService.makeRequest(selectedDrinks).subscribe();
-    
+    this.orderService.makeOrder(selectedDrinks).subscribe();
+
   }
 
   back(){

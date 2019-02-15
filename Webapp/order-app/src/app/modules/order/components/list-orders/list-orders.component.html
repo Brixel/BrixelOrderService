@@ -1,4 +1,24 @@
-<mat-list>
-  <mat-list-item *ngFor="let drink of drinks"> {{ drink.name }} ({{  drink.container | containerToTextPipe}})</mat-list-item>
+<mat-card *ngFor="let order of orders">
+  <mat-card-title>{{ order.creationDate | date }}</mat-card-title>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let drink of order.drinks">
+        {{ drink.name }} ({{
+          drink.container | containerToTextPipe
+        }})
+        <button mat-mini-fab color="primary" (click)="markDrinkAsDone(drink.id)">Primary</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
 
- </mat-list>
+
+<button mat-button (click)="clearDrinks()">Clear Order</button>
+<mat-card *ngIf="notification.length > 0">
+  <mat-card-title>Done</mat-card-title>
+  <mat-card-actions>
+    <button mat-button routerLink="/orders/request">
+      Make request
+    </button>
+  </mat-card-actions>
+</mat-card>

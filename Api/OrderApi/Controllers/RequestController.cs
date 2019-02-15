@@ -6,10 +6,10 @@ using OrderApi.Models;
 
 namespace OrderApi.Controllers
 {
-    [Route("api/requests")]
+    [Route("api/orders")]
     public class RequestController : Controller
     {
-        private readonly IList<Request> _requests = new List<Request>();
+        private static readonly IList<Request> _requests = new List<Request>();
 
         [HttpPost("")]
         public void MakeRequest([FromBody] IReadOnlyList<DrinkDTO> requestedDrinks)
@@ -22,6 +22,11 @@ namespace OrderApi.Controllers
             };
             _requests.Add(request);
         }
+         [HttpGet("")]
+         public IReadOnlyList<Request> GetRequests()
+         {
+            return _requests.Where(r => !r.IsCompleted).ToList();
+         }
     }
 
     public class RequestedDrink

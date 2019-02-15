@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../shared/order.service';
-import { Drink } from '../../shared/drink.model';
+import { Order } from '../../shared/request.model';
 
 @Component({
   selector: 'app-list-orders',
@@ -8,13 +8,27 @@ import { Drink } from '../../shared/drink.model';
   styleUrls: ['./list-orders.component.scss']
 })
 export class ListOrdersComponent implements OnInit {
-  drinks: Drink[];
+  orders: Order[];
+  notification = {
+    title: '',
+    body: ''
+  };
 
   constructor(private orderServive: OrderService) { }
 
   ngOnInit() {
-    this.orderServive.getDrinks().subscribe((res) => {
-      this.drinks = res;
+    this.orderServive.getOrders().subscribe((res) => {
+      console.log(res);
+      this.orders = res;
+    });
+  }
+
+  clearDrinks() {
+    this.orderServive.clearDrinks().subscribe((res) => {
+      this.notification.title = 'Done';
+      this.notification.body = 'Order was cleared!';
+    }, err => {
+      // TODO: error handling...
     });
   }
 
