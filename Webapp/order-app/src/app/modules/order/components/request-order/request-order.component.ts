@@ -21,7 +21,7 @@ export class RequestOrderComponent implements OnInit {
     });
   }
 
-  request(){
+  request() {
     const selectedDrinks = this.requestOrderFormGroup.getSelectedDrinks();
     console.log(selectedDrinks);
   }
