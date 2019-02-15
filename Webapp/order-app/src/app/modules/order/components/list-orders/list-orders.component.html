@@ -12,13 +12,4 @@
   </mat-card-content>
 </mat-card>
 
-
 <button mat-button (click)="clearDrinks()">Clear Order</button>
-<mat-card *ngIf="notification.length > 0">
-  <mat-card-title>Done</mat-card-title>
-  <mat-card-actions>
-    <button mat-button routerLink="/orders/request">
-      Make request
-    </button>
-  </mat-card-actions>
-</mat-card>

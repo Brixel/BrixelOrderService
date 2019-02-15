@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Drink, Containers } from './drink.model';
 import { OrderProxy } from './order.proxy';
 import { Observable } from 'rxjs';
-import { Order } from './request.model';
+import { Order } from './order.model';
 
 @Injectable({
   providedIn: 'root'
