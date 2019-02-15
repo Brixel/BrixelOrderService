@@ -7,6 +7,7 @@ import { Drink } from './drink.model';
 const rootUri = `/drinks`;
 @Injectable()
 export class OrderProxy {
+  
     constructor(private httpClient: HttpClient) {}
 
 
@@ -28,6 +29,12 @@ export class OrderProxy {
 
     getDrinks(): Observable<Drink[]> {
         return  this.httpClient.get<Drink[]>(`http://localhost:52289/api/drinks`).pipe(
+            catchError(this.handleError)
+          );
+    }
+
+    makeRequest(selectedDrinks: Drink[]) {
+      return  this.httpClient.post(`http://localhost:52289/api/requests`, selectedDrinks).pipe(
             catchError(this.handleError)
           );
     }
