@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../shared/order.service';
 import { Order } from '../../shared/order.model';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-list-orders',
@@ -14,7 +15,7 @@ export class ListOrdersComponent implements OnInit {
     body: ''
   };
 
-  constructor(private orderServive: OrderService) { }
+  constructor(private orderServive: OrderService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.orderServive.getOrders().subscribe((res) => {
@@ -23,12 +24,15 @@ export class ListOrdersComponent implements OnInit {
     });
   }
 
-  clearDrinks() {
-    this.orderServive.clearDrinks().subscribe((res) => {
-      this.notification.title = 'Done';
-      this.notification.body = 'Order was cleared!';
+  deleteOrder(id: string) {
+    this.orderServive.deleteOrder(id).subscribe((res) => {
+      this.snackBar.open(`Order ${id} deleted successfully!`, '', {
+        duration: 3000
+      });
     }, err => {
-      // TODO: error handling...
+      this.snackBar.open(`Failed to delete order ${id}!`, '', {
+        duration: 3000
+      });
     });
   }
 

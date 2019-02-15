@@ -1,6 +1,6 @@
 
 export class Drink {
-  id: number;
+  id: string;
   name: string;
   container: Containers;
 }

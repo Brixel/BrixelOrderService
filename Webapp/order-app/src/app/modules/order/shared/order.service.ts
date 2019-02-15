@@ -18,10 +18,11 @@ export class OrderService {
   makeOrder(selectedDrinks: Drink[]) {
     return this.orderProxy.makeOrder(selectedDrinks);
   }
-  clearDrinks(): Observable<any> {
-    return this.orderProxy.clearDrinks();
+  deleteOrder(id: string): Observable<any> {
+    return this.orderProxy.deleteOrder(id);
   }
   getOrders(): Observable<Order[]> {
     return this.orderProxy.getOrders();
   }
+
 }

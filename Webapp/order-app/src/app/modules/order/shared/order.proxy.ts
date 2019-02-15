@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { Order } from "./request.model";
+import { Order } from "./order.model";
 import { Drink } from "./drink.model";
 
 const rootUri = `/drinks`;
@@ -29,9 +29,9 @@ export class OrderProxy {
       .get<Drink[]>(`http://localhost:52289/api/drinks`)
       .pipe(catchError(this.handleError));
   }
-  clearDrinks(): Observable<any> {
+  deleteOrder(id: string): Observable<any> {
     return this.httpClient
-      .get<any>(`http://localhost:52289/api/drinks`)
+      .delete<any>(`http://localhost:52289/api/orders/${id}`)
       .pipe(catchError(this.handleError));
   }
   makeOrder(selectedDrinks: Drink[]) {
