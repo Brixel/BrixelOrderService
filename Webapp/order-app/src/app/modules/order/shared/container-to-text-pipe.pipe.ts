@@ -25,6 +25,9 @@ export class ContainerToTextPipePipe implements PipeTransform {
       case Containers.Glass:
         returnValue = 'Glass';
         break;
+      case Containers.Bottle25:
+        returnValue = 'Bottle 25cl';
+        break;
     }
     return returnValue;
   }

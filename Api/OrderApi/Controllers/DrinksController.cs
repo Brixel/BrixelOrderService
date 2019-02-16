@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using OrderApi.Models;
 
@@ -31,8 +33,52 @@ namespace OrderApi.Controllers
                 {
                     Name = "Tönisteiner",
                     Container = Containers.Can33
+                },
+                new DrinkDTO()
+                {
+                    Name ="Karmeliet",
+                    Container = Containers.Bottle33
+                },
+                new DrinkDTO{
+                    Name ="Duvel",
+                    Container = Containers.Bottle33
+                },
+                new DrinkDTO
+                {
+                    Name ="Dr. Pepper",
+                    Container = Containers.Can33
+                },
+                new DrinkDTO()
+                {
+                    Name = "Lipton Ice Tea",
+                    Container= Containers.Can33
+                },
+                new DrinkDTO()
+                {
+                    Name = "Jupiler",
+                    Container = Containers.Bottle25
+                },
+                new DrinkDTO
+                {
+                    Name ="Bruiswater",
+                    Container = Containers.Bottle25
+                },
+                new DrinkDTO()
+                {
+                    Name = "Kriek Lindemans",
+                    Container = Containers.Bottle25
+                },
+                new DrinkDTO()
+                {
+                    Name = "Strongbow Red Berries",
+                    Container = Containers.Bottle25
+                },
+                new DrinkDTO()
+                {
+                    Name ="Coca Cola",
+                    Container = Containers.Bottle25
                 }
-            };
+            }.OrderBy(x =>x .Name).ToList();
         }
     }
 }

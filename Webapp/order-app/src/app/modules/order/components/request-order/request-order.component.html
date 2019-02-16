@@ -1,7 +1,7 @@
 <div class="container">
     <form [formGroup]="requestOrderFormGroup">
         <mat-card class="card">
-            <mat-card-title>Make a request</mat-card-title>
+            <mat-card-title>Order a drink</mat-card-title>
             <mat-card-content>
                 <mat-form-field>
                     <mat-select placeholder="Drinks" multiple formControlName="drinkControl">
@@ -10,7 +10,7 @@
                 </mat-form-field>
             </mat-card-content>
             <mat-card-actions class="buttons">
-                <button mat-stroked-button type="button" color="primary" (click)="back()">Cancel</button>
+                <button mat-stroked-button type="button" color="primary" (click)="back()">Go back</button>
                 <button mat-flat-button type="button" color="primary"  (click)="request()">Submit</button>
             </mat-card-actions>
         </mat-card>

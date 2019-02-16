@@ -27,24 +27,24 @@ export class OrderProxy {
 
   getDrinks(): Observable<Drink[]> {
     return this.httpClient
-      .get<Drink[]>(`http://localhost:5000/api/drinks`)
+      .get<Drink[]>(`http://192.168.20.100:5000/api/drinks`)
       .pipe(catchError(this.handleError));
   }
   makeOrder(selectedDrinks: Drink[]) {
     return this.httpClient
-      .post(`http://localhost:5000/api/orders`, selectedDrinks)
+      .post(`http://192.168.20.100:5000/api/orders`, selectedDrinks)
       .pipe(catchError(this.handleError));
   }
   getOrders(): Observable<RequestedDrinkDTO[]> {
     return this.httpClient
-      .get<RequestedDrinkDTO[]>('http://localhost:5000/api/orders')
+      .get<RequestedDrinkDTO[]>('http://192.168.20.100:5000/api/orders')
       .pipe(catchError(this.handleError));
   }
 
   markDrinkAsCompleted(drinkId:string, completionDto: DrinkRequestCompletionDTO) {
     console.log(completionDto);
     return this.httpClient
-      .post(`http://localhost:5000/api/orders/${drinkId}/completed`, completionDto)
+      .post(`http://192.168.20.100:5000/api/orders/${drinkId}/completed`, completionDto)
       .pipe(catchError(this.handleError));
   }
 }
