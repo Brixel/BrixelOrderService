@@ -12,6 +12,8 @@ import { OrderProxy } from './shared/order.proxy';
 import { OrderService } from './shared/order.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ClientConfigurationService } from '../core/clientconfiguration.service';
+
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatOptionModule,
     CommonModule
   ],
-  providers: [ContainerToTextPipePipe, OrderProxy, OrderService]
+  providers: [ContainerToTextPipePipe,
+    ClientConfigurationService, OrderProxy, OrderService]
 
 })
 export class OrderModule { }
