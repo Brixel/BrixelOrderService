@@ -1,18 +1,19 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { Order } from "./order.model";
-import { Drink } from "./drink.model";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Order, DrinkRequestCompletionDTO, RequestedDrinkDTO } from './order.model';
+import { Drink } from './drink.model';
 
 const rootUri = `/drinks`;
 @Injectable()
 export class OrderProxy {
+  
   constructor(private httpClient: HttpClient) {}
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.error("An error occurred:", error.error.message);
+      console.error('An error occurred:', error.error.message);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
@@ -21,27 +22,29 @@ export class OrderProxy {
       );
     }
     // return an observable with a user-facing error message
-    return throwError("Something bad happened; please try again later.");
+    return throwError('Something bad happened; please try again later.');
   }
 
   getDrinks(): Observable<Drink[]> {
     return this.httpClient
-      .get<Drink[]>(`http://localhost:52289/api/drinks`)
-      .pipe(catchError(this.handleError));
-  }
-  deleteOrder(id: string): Observable<any> {
-    return this.httpClient
-      .delete<any>(`http://localhost:52289/api/orders/${id}`)
+      .get<Drink[]>(`http://localhost:5000/api/drinks`)
       .pipe(catchError(this.handleError));
   }
   makeOrder(selectedDrinks: Drink[]) {
     return this.httpClient
-      .post(`http://localhost:52289/api/orders`, selectedDrinks)
+      .post(`http://localhost:5000/api/orders`, selectedDrinks)
       .pipe(catchError(this.handleError));
   }
-  getOrders(): Observable<Order[]> {
+  getOrders(): Observable<RequestedDrinkDTO[]> {
     return this.httpClient
-      .get<Order[]>("http://localhost:52289/api/orders")
+      .get<RequestedDrinkDTO[]>('http://localhost:5000/api/orders')
+      .pipe(catchError(this.handleError));
+  }
+
+  markDrinkAsCompleted(drinkId:string, completionDto: DrinkRequestCompletionDTO) {
+    console.log(completionDto);
+    return this.httpClient
+      .post(`http://localhost:5000/api/orders/${drinkId}/completed`, completionDto)
       .pipe(catchError(this.handleError));
   }
 }

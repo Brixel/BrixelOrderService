@@ -4,77 +4,74 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OrderApi.Models;
+using OrderApi.Models.DTOs;
 
 namespace OrderApi.Controllers
 {
     [Route("api/orders")]
     public class OrderController : Controller
     {
-        private static IList<Order> _orders = new List<Order>();
+        private static List<RequestedDrink> requestedDrinks = new List<RequestedDrink>();
 
         [HttpPost("")]
         public void MakeOrder([FromBody] IReadOnlyList<DrinkDTO> requestedDrinks)
         {
-            var request = new Order()
+            var drinks = requestedDrinks.Select(x => new RequestedDrink()
             {
                 CreationDate = DateTime.Now,
                 IsCompleted = false,
-                Drinks = requestedDrinks.Select(x => new RequestedDrink(x)).ToList()
-            };
-            _orders.Add(request);
+                Container = x.Container,
+                Id = Guid.NewGuid(),
+                Name = x.Name
+
+            }).ToList();
+            OrderController.requestedDrinks.AddRange(drinks);
         }
+
          [HttpGet("")]
-         public IReadOnlyList<Order> GetRequests()
+         public List<RequestedDrinkDTO> GetOrders()
          {
-            return _orders.Where(r => !r.IsCompleted).ToList();
+           
+             var requestedDrink = requestedDrinks.Where(o => !o.IsCompleted).Select(d => new RequestedDrinkDTO()
+             {
+                 DrinkId = d.Id,
+                 IsCompleted = d.IsCompleted,
+                 CreationDate = d.CreationDate,
+                 Container = d.Container,
+                 Name = d.Name
+             }).ToList();
+             return requestedDrink;
          }
+
          [HttpDelete("{id}")]
          public void DeleteOrder(Guid id)
-      {
-         if(_orders.Single(o => o.Id == id) == null) {
-            throw new Exception("This order does not exist"); 
-         }
-         _orders = _orders.Where(o => o.Id != id).ToList();
-      }
-      [HttpPut("{orderId}/drinks/{drinkId}")]
-      public void UpdateOrderedDrink(Guid orderId, Guid drinkId, RequestedDrink newDrink)
-      {
-         var order = _orders.Single(o => o.Id == orderId);
-         var drink = order.Drinks.Single(d => d.Id == drinkId);
-         drink = newDrink;
+          {
+             if(requestedDrinks.Single(o => o.Id == id) == null) {
+                throw new Exception("This drinkRequest does not exist"); 
+             }
+             requestedDrinks = requestedDrinks.Where(o => o.Id != id).ToList();
+          }
 
-      }
-   }
+          [HttpPut("{drinkId}")]
+          public void UpdateOrderedDrink(Guid drinkId, RequestedDrinkDTO updateDrink)
+          {
+                var drink = GetDrink(drinkId);
+                drink.IsCompleted = updateDrink.IsCompleted;
+                drink.Container = updateDrink.Container;
+                drink.Name = updateDrink.Name;
+          }
 
-    public class RequestedDrink
-    {
-        private DrinkDTO _drinkDto;
-
-        public Guid Id { get; set; }
-
-      public bool IsCompleted { get; set; }
-
-        public RequestedDrink(DrinkDTO drinkDto)
+        private static RequestedDrink GetDrink(Guid drinkId)
         {
-            Id = Guid.NewGuid();
-            _drinkDto = drinkDto;
+            var drink = requestedDrinks.Single(o => o.Id == drinkId);
+            return drink;
         }
 
-        public string Name => _drinkDto.Name;
-
-        public Containers Container => _drinkDto.Container;
-    }
-
-    public class Order
-    {
-        public Guid Id { get; set; }
-        public bool IsCompleted { get; set; }
-        public List<RequestedDrink> Drinks { get; set; }
-        public DateTime CreationDate { get; set; }
-
-      public Order()
-      {
-         Id = Guid.NewGuid();
-      }
+        [HttpPost("{drinkId}/completed")]
+        public void MarkDrinkCompleted([FromBody] DrinkRequestCompletionDTO completionDto,Guid drinkId)
+        {
+            var drink = GetDrink(drinkId);
+            drink.IsCompleted = completionDto.IsCompleted;
+        }
     }
 }

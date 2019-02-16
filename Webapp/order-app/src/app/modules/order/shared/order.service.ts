@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Drink, Containers } from './drink.model';
 import { OrderProxy } from './order.proxy';
 import { Observable } from 'rxjs';
-import { Order } from './order.model';
+import { Order, DrinkRequestCompletionDTO, RequestedDrinkDTO } from './order.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +18,16 @@ export class OrderService {
   makeOrder(selectedDrinks: Drink[]) {
     return this.orderProxy.makeOrder(selectedDrinks);
   }
-  deleteOrder(id: string): Observable<any> {
-    return this.orderProxy.deleteOrder(id);
-  }
-  getOrders(): Observable<Order[]> {
+  getOrders(): Observable<RequestedDrinkDTO[]> {
     return this.orderProxy.getOrders();
+  }
+
+  markDrinkAsCompleted(drinkId: string, isCompleted: boolean){
+    const completionDto = <DrinkRequestCompletionDTO>{
+      id: drinkId,
+      isCompleted: isCompleted
+    };
+    return this.orderProxy.markDrinkAsCompleted(drinkId, completionDto);
   }
 
 }

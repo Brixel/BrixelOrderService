@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main.component';
-import { MatToolbarModule, MatSnackBarModule } from '@angular/material';
+import { MatToolbarModule, MatSnackBarModule, MatButtonModule, MatDividerModule, MatSidenavModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,10 @@ import { MatToolbarModule, MatSnackBarModule } from '@angular/material';
     BrowserAnimationsModule,
     AppRoutingModule,
     MatToolbarModule,
-    MatSnackBarModule
+    MatButtonModule,
+    MatSnackBarModule,
+    MatDividerModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

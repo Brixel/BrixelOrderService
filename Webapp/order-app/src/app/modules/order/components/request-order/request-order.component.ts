@@ -4,6 +4,7 @@ import { OrderService } from '../../shared/order.service';
 import { Drink } from '../../shared/drink.model';
 import { DrinkRequestFormGroup } from '../../shared/drinkrequest.formgroup';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-request-order',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class RequestOrderComponent implements OnInit {
   drinks: Drink[] = [];
-  constructor(private orderService: OrderService, private router: Router) { }
+  constructor(private orderService: OrderService, private router: Router, private matSnackBar: MatSnackBar) { }
   requestOrderFormGroup: DrinkRequestFormGroup;
   ngOnInit() {
     this.requestOrderFormGroup = new DrinkRequestFormGroup([]);
@@ -23,10 +24,17 @@ export class RequestOrderComponent implements OnInit {
   }
 
   request() {
-    const selectedDrinks = this.requestOrderFormGroup.getSelectedDrinks();
-    this.orderService.makeOrder(selectedDrinks).subscribe();
-
-  }
+    if(this.requestOrderFormGroup.valid){
+      const selectedDrinks = this.requestOrderFormGroup.getSelectedDrinks();
+      this.orderService.makeOrder(selectedDrinks).subscribe((res) => {
+        this.matSnackBar.open(`An order for ${selectedDrinks.map(sd => sd.name).join(', ')} has been placed`, null, {
+          verticalPosition: 'top',
+          duration: 2000
+        });
+        this.requestOrderFormGroup.reset();
+      });
+    }
+    }
 
   back(){
     this.router.navigate(['../']);
