@@ -16,13 +16,12 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "OrderApi": {
+    "Pi": {
       "commandName": "Project",
-      "launchUrl": "api/values",
+      "applicationUrl": "http://*:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://localhost:5000"
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
     }
   }
 }
