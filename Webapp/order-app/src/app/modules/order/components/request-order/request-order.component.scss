@@ -1,11 +1,14 @@
 .container{
     display: flex;
     justify-content: center;
-}
-.card{
-    width: 500px;
-    .buttons{
-        display: flex;
-        justify-content: space-between
+    flex-direction: row;
+    flex-wrap:wrap;
+    .card{
+        margin:10px;
+        width: 300px;
+        .buttons{
+            display: flex;
+            justify-content: space-between
+        }
     }
 }

@@ -4,7 +4,7 @@ import { OrderOverviewComponent } from './pages/order-overview/order-overview.co
 import { RequestOrderComponent } from './components/request-order/request-order.component';
 import { ListOrdersComponent } from './components/list-orders/list-orders.component';
 import { MatListModule, MatGridListModule, MatCardModule, MatButtonModule, 
-  MatSelectModule, MatOptionModule, MatFormFieldModule} from '@angular/material';
+  MatSelectModule, MatOptionModule, MatFormFieldModule, MatCheckboxModule} from '@angular/material';
 import { OrderRoutingModule } from './order-routing.module';
 import { RouterModule } from '@angular/router';
 import { ContainerToTextPipePipe } from './shared/container-to-text-pipe.pipe';
@@ -12,6 +12,8 @@ import { OrderProxy } from './shared/order.proxy';
 import { OrderService } from './shared/order.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ClientConfigurationService } from '../core/clientconfiguration.service';
+
 
 
 @NgModule({
@@ -22,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     RouterModule,
     OrderRoutingModule,
+    MatCheckboxModule,
     MatGridListModule,
     MatButtonModule,
     MatCardModule,
@@ -30,7 +33,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatOptionModule,
     CommonModule
   ],
-  providers: [ContainerToTextPipePipe, OrderProxy, OrderService]
+  providers: [ContainerToTextPipePipe,
+    ClientConfigurationService, OrderProxy, OrderService]
 
 })
 export class OrderModule { }
