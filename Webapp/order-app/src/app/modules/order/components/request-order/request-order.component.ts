@@ -29,7 +29,7 @@ export class RequestOrderComponent implements OnInit, AfterViewInit {
     });
   }
   private calculateColumns(width: number): number {
-    return (width <= 400) ? 1 : 4;
+    return (width <= 600) ? 1 : 4;
   }
 
   ngAfterViewInit() {
@@ -42,6 +42,7 @@ export class RequestOrderComponent implements OnInit, AfterViewInit {
   }
   request() {
     const selectedDrinks = this.toggles.filter(t => t.checked).map(t => t.value);
+    if(selectedDrinks.length !== 0 ){
       this.orderService.makeOrder(selectedDrinks).subscribe((res) => {
         this.matSnackBar.open(`An order for ${selectedDrinks.map(sd => sd.name).join(', ')} has been placed`, null, {
           verticalPosition: 'top',
@@ -49,6 +50,7 @@ export class RequestOrderComponent implements OnInit, AfterViewInit {
         });
         this.toggles.forEach(x => x.checked = false);
       });
+    }
     }
 
   back(){

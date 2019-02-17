@@ -16,7 +16,7 @@ export class OrderOverviewComponent implements OnInit {
   }
   
   private calculateColumns(width: number): number {
-    return (width <= 400) ? 1 : 4;
+    return (width <= 600) ? 1 : 4;
   }
 
   onResize(event) {
