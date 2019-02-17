@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OrderApi.Models;
 
@@ -12,6 +14,7 @@ namespace OrderApi.Controllers
         [HttpGet("")]
         public IReadOnlyList<DrinkDTO> GetDrinks()
         {
+            
             return new List<DrinkDTO>()
             {
                 new DrinkDTO()
