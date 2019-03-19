@@ -1,11 +1,19 @@
+@import '~@angular/material/theming';
 .container{
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    flex-wrap:wrap;
     .card{
         margin:10px;
-        width: 300px;
+        .drinkTile{
+            width: calc(100% - 5px);
+            height: calc(100% - 5px);
+            img{
+                margin:10px;
+                max-height: 250px;
+                max-width: 50px;
+            }
+        }
+        .mat-button-toggle-checked{
+            border-color: blueviolet;
+        }
         .buttons{
             display: flex;
             justify-content: space-between

@@ -44,7 +44,7 @@ export function initializeApp(clientConfigurationService: ClientConfigurationSer
       return clientConfigurationService
           .load()
           .subscribe(
-              (result) => {console.log(result)},
+              (result) => { },
               (error) => {
                   alert('Failed to initialize application');
               }

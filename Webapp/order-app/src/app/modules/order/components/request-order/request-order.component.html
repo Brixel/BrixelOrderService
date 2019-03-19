@@ -3,11 +3,13 @@
         <mat-card class="card">
             <mat-card-title>Order a drink</mat-card-title>
             <mat-card-content>
-                <mat-form-field>
-                    <mat-select placeholder="Drinks" multiple formControlName="drinkControl">
-                        <mat-option value="option" *ngFor="let drink of drinks" [value]="drink.name">{{ drink.name }} ({{ drink.container | containerToTextPipe }})</mat-option>
-                    </mat-select>         
-                </mat-form-field>
+                <mat-grid-list [cols]="amountOfCols" rowHeight="2:1" (window:resize)="onResize($event)" class="list">
+                    <mat-grid-tile *ngFor="let drink of drinks">
+                            
+                        <mat-button-toggle [value]="drink" class="drinkTile"><img mat-card-sm-image src="{{ drink.imageUri }}" />{{ drink.name }} ({{ drink.container | containerToTextPipe }})</mat-button-toggle>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <mat-button-toggle-group multiple="true" name="drinksGroup"></mat-button-toggle-group>
             </mat-card-content>
             <mat-card-actions class="buttons">
                 <button mat-stroked-button type="button" color="primary" (click)="back()">Go back</button>

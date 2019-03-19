@@ -1,6 +1,7 @@
-<mat-grid-list cols="2" rowHeight="2:1">
-  <mat-grid-tile>
-    <mat-card>
+
+<mat-grid-list [cols]="amountOfCols" rowHeight="2:1" class="list" (window:resize)="onResize($event)" >
+  <mat-grid-tile class="tile">
+    <mat-card class="card">
       <mat-card-title>Place order</mat-card-title>
       <mat-card-actions>
         <button  mat-flat-button color="primary" routerLink="/orders/request">
@@ -9,8 +10,8 @@
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-card>
+  <mat-grid-tile class="tile">
+      <mat-card class="card">
       <mat-card-title>Orders</mat-card-title>
       <mat-card-actions>
         <button mat-flat-button color="primary" routerLink="/orders/list">

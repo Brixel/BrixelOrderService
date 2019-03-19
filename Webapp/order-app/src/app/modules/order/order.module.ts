@@ -4,7 +4,7 @@ import { OrderOverviewComponent } from './pages/order-overview/order-overview.co
 import { RequestOrderComponent } from './components/request-order/request-order.component';
 import { ListOrdersComponent } from './components/list-orders/list-orders.component';
 import { MatListModule, MatGridListModule, MatCardModule, MatButtonModule, 
-  MatSelectModule, MatOptionModule, MatFormFieldModule, MatCheckboxModule} from '@angular/material';
+  MatSelectModule, MatOptionModule, MatFormFieldModule, MatCheckboxModule, MatButtonToggleModule} from '@angular/material';
 import { OrderRoutingModule } from './order-routing.module';
 import { RouterModule } from '@angular/router';
 import { ContainerToTextPipePipe } from './shared/container-to-text-pipe.pipe';
@@ -27,6 +27,7 @@ import { ClientConfigurationService } from '../core/clientconfiguration.service'
     MatCheckboxModule,
     MatGridListModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatListModule,
     MatSelectModule,
