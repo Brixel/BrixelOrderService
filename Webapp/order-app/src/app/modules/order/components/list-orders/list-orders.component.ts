@@ -9,7 +9,7 @@ import { MatSnackBar, MatCheckboxChange } from '@angular/material';
   styleUrls: ['./list-orders.component.scss']
 })
 export class ListOrdersComponent implements OnInit {
-  requestedDrinks: RequestedDrinkDTO[];
+  requestedDrinks: RequestedDrinkDTO[] = [];
   notification = {
     title: '',
     body: ''

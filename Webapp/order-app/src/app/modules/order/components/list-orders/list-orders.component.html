@@ -10,6 +10,6 @@
       <button mat-flat-button color="primary" (click)="markDrinkAsDone(requestedDrink.drinkId)">
         Mark as completed</button></mat-card-actions>
   </mat-card>
-  <mat-card class="card">
-    <mat-card-content>No drinks requested</mat-card-content></mat-card>
+  <mat-card class="card" *ngIf="requestedDrinks.length === 0">
+    <mat-card-content>No drinks requested at all</mat-card-content></mat-card>
 </div>

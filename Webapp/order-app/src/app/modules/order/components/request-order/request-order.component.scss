@@ -5,6 +5,11 @@
         .drinkTile{
             width: calc(100% - 5px);
             height: calc(100% - 5px);
+            img{
+                margin:10px;
+                max-height: 250px;
+                max-width: 50px;
+            }
         }
         .mat-button-toggle-checked{
             border-color: blueviolet;

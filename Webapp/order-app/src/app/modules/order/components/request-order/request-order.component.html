@@ -5,7 +5,8 @@
             <mat-card-content>
                 <mat-grid-list [cols]="amountOfCols" rowHeight="2:1" (window:resize)="onResize($event)" class="list">
                     <mat-grid-tile *ngFor="let drink of drinks">
-                        <mat-button-toggle [value]="drink" class="drinkTile">{{ drink.name }} ({{ drink.container | containerToTextPipe }})</mat-button-toggle>
+                            
+                        <mat-button-toggle [value]="drink" class="drinkTile"><img mat-card-sm-image src="{{ drink.imageUri }}" />{{ drink.name }} ({{ drink.container | containerToTextPipe }})</mat-button-toggle>
                     </mat-grid-tile>
                 </mat-grid-list>
                 <mat-button-toggle-group multiple="true" name="drinksGroup"></mat-button-toggle-group>
