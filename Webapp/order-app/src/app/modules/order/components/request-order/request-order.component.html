@@ -1,13 +1,7 @@
 <div class="container">
     <form [formGroup]="requestOrderFormGroup">
         <mat-card class="card">
-            <div class="title-actions">
             <mat-card-title>Order a drink</mat-card-title>
-            <mat-card-actions class="buttons">
-                    <button mat-stroked-button type="button" color="primary" (click)="back()">Go back</button>
-                    <button mat-flat-button type="button" color="primary"  (click)="request()">Submit</button>
-                </mat-card-actions>
-            </div>
             <mat-card-content>
                 <mat-grid-list [cols]="amountOfCols" rowHeight="2:1" (window:resize)="onResize($event)" class="list">
                     <mat-grid-tile *ngFor="let drink of drinks">
@@ -17,10 +11,13 @@
                 </mat-grid-list>
                 <mat-button-toggle-group multiple="true" name="drinksGroup"></mat-button-toggle-group>
             </mat-card-content>
+            
+        </mat-card>
+    </form>
+    <mat-toolbar class="sticky">
             <mat-card-actions class="buttons">
                 <button mat-stroked-button type="button" color="primary" (click)="back()">Go back</button>
                 <button mat-flat-button type="button" color="primary"  (click)="request()">Submit</button>
             </mat-card-actions>
-        </mat-card>
-    </form>
+        </mat-toolbar>
 </div>

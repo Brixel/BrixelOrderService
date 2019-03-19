@@ -18,6 +18,14 @@
             display: flex;
             justify-content: space-between;
         }
+    }
+    .sticky{
+        display: flex;
+        justify-content: space-around;
+        position: fixed;
+        bottom: 0px;
+        width:96vw;
+        padding-top:25px;
         .buttons{
             display: flex;
             justify-content: flex-end;
@@ -25,5 +33,5 @@
                 margin-left:16px;
             }
         }
-    }
+    }   
 }
