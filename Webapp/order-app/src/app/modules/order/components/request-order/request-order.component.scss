@@ -14,9 +14,16 @@
         .mat-button-toggle-checked{
             border-color: blueviolet;
         }
+        .title-actions{
+            display: flex;
+            justify-content: space-between;
+        }
         .buttons{
             display: flex;
-            justify-content: space-between
+            justify-content: flex-end;
+            button{
+                margin-left:16px;
+            }
         }
     }
 }
