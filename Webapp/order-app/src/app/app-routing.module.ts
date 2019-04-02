@@ -12,6 +12,11 @@ const routes: Routes = [
     path: 'orders',
     component: MainComponent,
     loadChildren: './modules/order/order.module#OrderModule'
+  },
+  {
+    path:'space',
+    component: MainComponent,
+    loadChildren: './modules/space-state/space-state.module#SpaceStateModule'
   }
 ];
 

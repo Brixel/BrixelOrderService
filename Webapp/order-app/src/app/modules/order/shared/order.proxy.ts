@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { Order, DrinkRequestCompletionDTO, RequestedDrinkDTO } from './order.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { DrinkRequestCompletionDTO, RequestedDrinkDTO } from './order.model';
 import { Drink } from './drink.model';
-import { ClientConfigurationService } from '../../core/clientconfiguration.service';
 import { ApiService } from '../../core/api.service';
 
 

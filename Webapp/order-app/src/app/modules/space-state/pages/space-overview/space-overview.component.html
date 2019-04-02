@@ -1,0 +1,12 @@
+<mat-grid-list [cols]="amountOfCols" rowHeight="2:1" class="list" (window:resize)="onResize($event)" >
+  <mat-grid-tile class="tile">
+    <mat-card class="card">
+      <mat-card-title>Current space state</mat-card-title>
+      <mat-card-content>
+        <div *ngIf="spaceState">
+        {{ spaceState!.open ? 'The space is open' : 'The space is closed' }}</div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+<router-outlet></router-outlet>

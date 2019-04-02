@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Brixel.SpaceAPI.Core" Version="0.1.0-CI-20190319-211826" />
+    <PackageReference Include="Brixel.SpaceAPI.Core" Version="0.1.0-CI-20190326-221942" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
