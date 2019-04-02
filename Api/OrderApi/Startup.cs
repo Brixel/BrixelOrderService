@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Brixel.SpaceAPI.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
@@ -28,7 +29,8 @@ namespace OrderApi
             var corsPolicy = new CorsPolicyBuilder().AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod().Build();
             services.AddCors(options => options.AddDefaultPolicy(corsPolicy));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            
+            services.AddTransient<IHttpClientFactory, HttpClientFactory>();
+            services.AddTransient<ISpaceAPIService, SpaceAPIService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

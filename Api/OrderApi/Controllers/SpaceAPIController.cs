@@ -3,23 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Brixel.SpaceAPI.Core.Models;
+using Brixel.SpaceAPI.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OrderApi.Controllers
 {
+    [Route("api/spaceapi")]
     public class SpaceAPIController : Controller
     {
-        private HttpClient _client;
+        private readonly ISpaceAPIService _apiService;
 
-        public SpaceAPIController()
+        
+        public SpaceAPIController(ISpaceAPIService apiService)
         {
-            _client = new HttpClient();
-            _client.BaseAddress = new Uri("https://spaceapi.azurewebsites.net");
-            
+            _apiService = apiService;
         }
-        public void GetCurrentSpaceState()
+
+        [HttpGet("info")]
+        public async Task<SpaceAPIRoot> GetCurrentSpaceInfo()
         {
-            
+            var state =  await _apiService.GetSpaceApiAsync();
+            return state;
+        }
+
+        [HttpGet("status")]
+        public async Task<SpaceApiLog> GetCurrrentSpaceState()
+        {
+            return await _apiService.GetCurrentSpaceStatusAsync();
         }
     }
 }

@@ -1,3 +1,7 @@
 {
-    "apiUri":"http://localhost:5000"
+    "apiUri":"http://localhost:5000",
+    "features": [
+        "spaceAP"
+    ]
+    
 }
