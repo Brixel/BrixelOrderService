@@ -18,7 +18,8 @@ export class ClientConfigurationService {
         return this.httpClient.get<ClientConfiguration>('/assets/config.json').pipe(
             map((config) => {
                 const clientConfiguration = <ClientConfiguration>{
-                    apiUri: config.apiUri
+                    apiUri: config.apiUri,
+                    features: config.features
                 };
                 this.setClientConfiguration(clientConfiguration);
                 return this.getClientConfiguration();

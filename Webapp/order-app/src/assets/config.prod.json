@@ -1,3 +1,6 @@
 {
-    "apiUri":"http://192.168.20.100:5000"
+    "apiUri":"http://192.168.20.100:5000",
+    "features": [
+        "spaceAPI"
+    ]
 }

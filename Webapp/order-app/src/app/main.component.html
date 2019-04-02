@@ -1,6 +1,6 @@
 <mat-toolbar>
     <span><a routerLink="/orders"> Brixel drink request system</a></span>
-    <span><a routerLink="/space"> Brixel Space state</a></span>
+    <span><a routerLink="/space" *ngIf="canRequestSpaceAPI()"> Brixel Space state</a></span>
     <mat-divider [vertical]="true"></mat-divider>
   </mat-toolbar>
   <router-outlet></router-outlet>
