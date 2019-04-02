@@ -73,5 +73,16 @@ namespace OrderApi.Controllers
             var drink = GetDrink(drinkId);
             drink.IsCompleted = completionDto.IsCompleted;
         }
+
+        [HttpPost("completed")]
+        public AllDrinkRequestCompletedDTO MarkAllDrinksAsCompleted()
+        {
+            var notCompletedDrinks = requestedDrinks.Where(o => !o.IsCompleted).ToList();
+            notCompletedDrinks.ForEach(x => x.IsCompleted = true);
+            return new AllDrinkRequestCompletedDTO()
+            {
+                IsCompleted = requestedDrinks.All(x => x.IsCompleted)
+            };
+        }
     }
 }

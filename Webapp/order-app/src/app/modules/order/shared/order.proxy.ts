@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DrinkRequestCompletionDTO, RequestedDrinkDTO } from './order.model';
+import { DrinkRequestCompletionDTO, RequestedDrinkDTO, AllDrinkRequestCompletedDTO } from './order.model';
 import { Drink } from './drink.model';
 import { ApiService } from '../../core/api.service';
 
 
 @Injectable()
 export class OrderProxy {
+  
   baseUri: string;
   
   constructor(private apiService: ApiService) { }
@@ -28,5 +29,10 @@ export class OrderProxy {
   markDrinkAsCompleted(drinkId:string, completionDto: DrinkRequestCompletionDTO) {
     return this.apiService
       .post(`/api/orders/${drinkId}/completed`, completionDto)
+  }
+
+  markAllDrinksAsCompleted(): Observable<AllDrinkRequestCompletedDTO> {
+    return this.apiService
+      .post(`/api/orders/completed`).pipe(map((res) => res));
   }
 }

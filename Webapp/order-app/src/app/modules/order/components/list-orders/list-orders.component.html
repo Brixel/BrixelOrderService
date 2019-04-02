@@ -1,4 +1,9 @@
 <div class="container">
+  <div class="action-header" *ngIf="requestedDrinks.length !== 0">
+    <button mat-flat-button  color="primary" (click)="onCloseAll()">Close all</button>
+    <mat-divider></mat-divider>
+  </div>
+  
   <mat-card *ngFor="let requestedDrink of requestedDrinks" class="card">
     <mat-card-content>
         <p>{{ requestedDrink.name }} ({{

@@ -23,3 +23,6 @@ export interface DrinkRequestCompletionDTO{
   id:string;
   isCompleted: boolean;
 }
+export interface AllDrinkRequestCompletedDTO{
+  isCompleted: boolean;
+}

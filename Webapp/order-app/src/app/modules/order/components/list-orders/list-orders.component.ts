@@ -36,4 +36,15 @@ export class ListOrdersComponent implements OnInit {
     })
   }
 
+  onCloseAll(){
+    this.orderService.markAllDrinksAsDone()
+      .subscribe(res => {
+        this.snackBar.open('All orders have been completed', '', {
+          duration: 3000
+        });
+
+        this.loadOrders();
+      });    
+  }
+
 }
