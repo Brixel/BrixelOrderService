@@ -2,7 +2,7 @@
 The lazy Brixelian's tool to request drinks
 
 ## Goal
-To achieve more by doing even less, the Brixel Order Service is a lightweight service that allows the members of Brixel to place drink requests in a system. The ordered drinks are then being shown by an PoS-system close to the fridge containing all the cool goodness.
+To achieve more by doing even less, the Brixel Order Service is a lightweight service that allows the members of [Brixel](https://brixel.be) to place drink requests in a system. The ordered drinks are then being shown by an PoS-system close to the fridge containing all the cool goodness.
 
 ## Setup
 The system contains of two parts:
