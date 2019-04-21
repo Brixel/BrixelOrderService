@@ -12,6 +12,7 @@
     <PackageReference Include="Brixel.SpaceAPI.Core" Version="0.1.0-CI-20190326-221942" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="MQTTnet" Version="2.8.5" />
   </ItemGroup>
 
 </Project>

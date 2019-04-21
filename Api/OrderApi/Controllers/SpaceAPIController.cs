@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Brixel.SpaceAPI.Core.Models;
 using Brixel.SpaceAPI.Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using OrderApi.Services;
 
 namespace OrderApi.Controllers
 {
@@ -30,6 +31,8 @@ namespace OrderApi.Controllers
         [HttpGet("status")]
         public async Task<SpaceApiLog> GetCurrrentSpaceState()
         {
+            var x = new SpaceAPIMqtt();
+            await x.RequestOpenState();
             return await _apiService.GetCurrentSpaceStatusAsync();
         }
     }
