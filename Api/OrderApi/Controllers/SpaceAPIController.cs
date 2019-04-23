@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Brixel.SpaceAPI.Core.Models;
 using Brixel.SpaceAPI.Core.Services;
+using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Mvc;
 using OrderApi.Services;
 
@@ -33,6 +34,22 @@ namespace OrderApi.Controllers
         {
             var x = new SpaceAPIMqtt();
             await x.RequestOpenState();
+            return await _apiService.GetCurrentSpaceStatusAsync();
+        }
+
+        [HttpPost("open")]
+        public async Task<SpaceApiLog> Open()
+        {
+            var spaceApiMQTT = new SpaceAPIMqtt();
+            await spaceApiMQTT.RequestOpenState(true);
+            return await _apiService.GetCurrentSpaceStatusAsync();
+        }
+
+        [HttpPost("close")]
+        public async Task<SpaceApiLog> Close()
+        {
+            var spaceAPIMQTT = new SpaceAPIMqtt();
+            await spaceAPIMQTT.RequestOpenState(false);
             return await _apiService.GetCurrentSpaceStatusAsync();
         }
     }

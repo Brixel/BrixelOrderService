@@ -7,12 +7,13 @@ using System.Xml;
 using System.Xml.Serialization;
 using MQTTnet;
 using MQTTnet.Client;
+using MQTTnet.Protocol;
 
 namespace OrderApi.Services
 {
     public class SpaceAPIMqtt
     {
-        public async Task RequestOpenState()
+        public async Task RequestOpenState(bool isOpen)
         {
             var mqttClientFactory = new MqttFactory();
             var client = mqttClientFactory.CreateMqttClient();
@@ -20,20 +21,14 @@ namespace OrderApi.Services
                 .WithTcpServer("192.168.20.100", 1883).Build();
             var result = await client.ConnectAsync(options);
 
+            var isOpenPayload = isOpen ? "open" : " close";
 
             var message = new MqttApplicationMessageBuilder()
                 .WithTopic("/brixel/spaceapi/state")
+                .WithAtMostOnceQoS()
 
-                .WithPayload(" hello").Build();
-            try
-            {
-                await client.PublishAsync(message);
-
-            }
-            catch (Exception ex)
-            {
-
-            }
+                .WithPayload(isOpenPayload).Build();
+            await client.PublishAsync(message);
         }
     }
 }
