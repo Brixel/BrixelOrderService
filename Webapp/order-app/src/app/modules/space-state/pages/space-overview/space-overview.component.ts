@@ -15,13 +15,27 @@ export class SpaceOverviewComponent implements OnInit {
 
   ngOnInit() {
     this.amountOfCols = this.calculateColumns(window.innerWidth);
-    console.log('load');
     this.spaceApiProxy.getCurrentState().subscribe((res) => {
       this.spaceState = res;
     })
   }
   private calculateColumns(width: number): number {
     return (width <= 600) ? 1 : 4;
+  }
+
+  onRequestNewState(){
+    if(!this.spaceState.open){
+
+      this.spaceApiProxy.requestOpenState().subscribe((res) => {
+        console.log(res)
+        this.spaceState = res;
+      })
+    }else{
+      
+      this.spaceApiProxy.requestCloseState().subscribe((res) => {
+        this.spaceState = res;
+      })
+    }
   }
 
   onResize(event) {

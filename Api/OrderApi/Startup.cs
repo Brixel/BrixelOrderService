@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using OrderApi.Models.Configuration;
+using OrderApi.Services;
 
 namespace OrderApi
 {
@@ -26,11 +28,15 @@ namespace OrderApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var mqttConfiguration = new MqttConfiguration();
+            Configuration.GetSection("mqtt").Bind(mqttConfiguration);
+
             var corsPolicy = new CorsPolicyBuilder().AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod().Build();
             services.AddCors(options => options.AddDefaultPolicy(corsPolicy));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IHttpClientFactory, HttpClientFactory>();
             services.AddTransient<ISpaceAPIService, SpaceAPIService>();
+            services.AddTransient<ISpaceAPIMqttService>(s => new SpaceAPIMqtt(mqttConfiguration));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

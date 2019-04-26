@@ -13,4 +13,12 @@ export class SpaceApiProxy {
   getCurrentState() : Observable<SpaceAPILog>{
       return this.apiService.get('/api/spaceapi/status').pipe(map((res) => res));
   }
+  
+  requestOpenState() : Observable<SpaceAPILog>{
+    return this.apiService.post('/api/spaceapi/open').pipe(map((res) => res));
+  }
+  
+  requestCloseState() : Observable<SpaceAPILog>{
+    return this.apiService.post('/api/spaceapi/close').pipe(map((res) => res));
+  }
 }

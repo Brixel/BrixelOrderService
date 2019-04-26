@@ -15,11 +15,13 @@ namespace OrderApi.Controllers
     public class SpaceAPIController : Controller
     {
         private readonly ISpaceAPIService _apiService;
+        private readonly ISpaceAPIMqttService _spaceApiMqttService;
 
-        
-        public SpaceAPIController(ISpaceAPIService apiService)
+
+        public SpaceAPIController(ISpaceAPIService apiService, ISpaceAPIMqttService spaceApiMqttService)
         {
             _apiService = apiService;
+            _spaceApiMqttService = spaceApiMqttService;
         }
 
         [HttpGet("info")]
@@ -32,24 +34,20 @@ namespace OrderApi.Controllers
         [HttpGet("status")]
         public async Task<SpaceApiLog> GetCurrrentSpaceState()
         {
-            var x = new SpaceAPIMqtt();
-            await x.RequestOpenState();
             return await _apiService.GetCurrentSpaceStatusAsync();
         }
 
         [HttpPost("open")]
         public async Task<SpaceApiLog> Open()
         {
-            var spaceApiMQTT = new SpaceAPIMqtt();
-            await spaceApiMQTT.RequestOpenState(true);
+            await _spaceApiMqttService.RequestOpenState(true);
             return await _apiService.GetCurrentSpaceStatusAsync();
         }
 
         [HttpPost("close")]
         public async Task<SpaceApiLog> Close()
         {
-            var spaceAPIMQTT = new SpaceAPIMqtt();
-            await spaceAPIMQTT.RequestOpenState(false);
+            await _spaceApiMqttService.RequestOpenState(false);
             return await _apiService.GetCurrentSpaceStatusAsync();
         }
     }
