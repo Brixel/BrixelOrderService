@@ -15,6 +15,11 @@ const routes: Routes = [
     loadChildren: './modules/order/order.module#OrderModule'
   },
   {
+    path: 'message',
+    component: MainComponent,
+    loadChildren: './modules/message-board/message-board.module#MessageBoardModule'
+  },
+  {
     path:'space',
     component: MainComponent,
     canActivate: [SpaceAPIFeatureGuard],

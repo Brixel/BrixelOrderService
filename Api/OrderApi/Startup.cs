@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Brixel.SpaceAPI.Core.Services;
+﻿using Brixel.SpaceAPI.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using OrderApi.Controllers;
 
 namespace OrderApi
 {
@@ -31,6 +26,7 @@ namespace OrderApi
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IHttpClientFactory, HttpClientFactory>();
             services.AddTransient<ISpaceAPIService, SpaceAPIService>();
+            services.AddTransient<IMQTTService, MQTTService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,17 @@
+<div class="container">
+  <form [formGroup]="messageBoardFormGroup" (ngSubmit)="request()">
+    <mat-card class="card">
+      <mat-card-title>Write a message to the message board</mat-card-title>
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput placeholder="Message" formControlName="messageControl">
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+    <mat-toolbar class="sticky">
+            <mat-card-actions class="buttons">
+                <button mat-stroked-button type="button" color="primary" (click)="back()">Go back</button>
+                <button mat-flat-button type="button" color="primary"  (click)="request()">Submit</button>
+            </mat-card-actions>
+        </mat-toolbar>
+</form></div>
