@@ -1,6 +1,4 @@
 {
-    "apiUri":"http://192.168.20.100:5000",
-    "features": [
-        "spaceAPI"
-    ]
+    "apiUri":"https://weu-drink-request-api.azurewebsites.net",
+    "features": []
 }
