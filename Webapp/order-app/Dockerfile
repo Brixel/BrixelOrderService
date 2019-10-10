@@ -6,4 +6,5 @@ RUN $(npm bin)/ng build --prod
 
 
 FROM nginx:latest
+COPY --from=builder /app/nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /app/dist/order-app /usr/share/nginx/html
